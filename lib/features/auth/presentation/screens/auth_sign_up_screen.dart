@@ -63,15 +63,17 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                 // success snackbar
                 AppSnackBarHelper.showSnackBar(
                   context: context,
-                  message: "Internet Connected",
+                  message: AppTextConstants.internetSuccessText,
                   isSuccess: true,
+                  customIcon: Icons.signal_cellular_4_bar_outlined,
                 );
               } else if (state is ConnectivityFailure) {
                 // failure snackbar
                 AppSnackBarHelper.showSnackBar(
                   context: context,
-                  message: "No Internet Connected",
+                  message: AppTextConstants.internetFailureText,
                   isSuccess: false,
+                  customIcon: Icons.mobiledata_off_sharp,
                 );
               }
             },

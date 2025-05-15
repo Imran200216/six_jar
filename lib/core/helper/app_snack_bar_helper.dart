@@ -7,21 +7,23 @@ class AppSnackBarHelper {
     required BuildContext context,
     required String message,
     required bool isSuccess,
+    IconData? customIcon,
   }) {
+    final iconToUse =
+        customIcon ?? (isSuccess ? Icons.check_circle : Icons.error);
+
     final snackBar = SnackBar(
       behavior: SnackBarBehavior.floating,
       backgroundColor: isSuccess
           ? AppColors.snackBarSuccessBgColor
           : AppColors.snackBarFailureBgColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4.r),
-      ),
-      margin:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.r)),
+      margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
       duration: const Duration(seconds: 4),
       content: Row(
         children: [
           Icon(
-            isSuccess ? Icons.check_circle : Icons.error,
+            iconToUse,
             color: isSuccess
                 ? AppColors.snackBarSuccessTextColor
                 : AppColors.snackBarFailureTextColor,

@@ -83,4 +83,40 @@ class AppTextConstants {
 
   // home screen Text
   static const String totalBalanceText = "Total Balance";
+
+  // Internet Snackbar Text
+  static const String internetSuccessText =
+      "You're back online! Enjoy seamless access.";
+  static const String internetFailureText =
+      "You're offline. Reconnect to the internet to continue.";
+
+ // Jar Names
+  static const String jarNecessitiesName = "Necessities";
+  static const String jarPlayName = "Play";
+  static const String jarEducationName = "Education";
+  static const String jarSavingsName = "Savings";
+  static const String jarGiveName = "Give";
+  static const String jarFinancialFreedomName = "Financial Freedom";
+
+  // Jar Descriptions
+  static const String jarNecessitiesDescription =
+      "Basic needs like food, housing, utilities";
+  static const String jarPlayDescription =
+      "Entertainment, dining out, fun activities";
+  static const String jarEducationDescription =
+      "Books, courses, learning materials";
+  static const String jarSavingsDescription =
+      "Big future purchases and goals";
+  static const String jarGiveDescription =
+      "Giving back to others";
+  static const String jarFinancialFreedomDescription =
+      "Investments and passive income";
+
+  // Jar Percentages
+  static const String jarNecessitiesPercent = "55%";
+  static const String jarPlayPercent = "10%";
+  static const String jarEducationPercent = "10%";
+  static const String jarSavingsPercent = "10%";
+  static const String jarGivePercent = "5%";
+  static const String jarFinancialFreedomPercent = "10%";
 }

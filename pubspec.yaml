@@ -54,6 +54,9 @@ dependencies:
   # internet checker
   connectivity_plus: ^6.1.4
 
+  # Charts 
+  fl_chart: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

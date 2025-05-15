@@ -26,15 +26,17 @@ class HomeScreen extends StatelessWidget {
                 // success snackbar
                 AppSnackBarHelper.showSnackBar(
                   context: context,
-                  message: "Internet Connected",
+                  message: AppTextConstants.internetSuccessText,
                   isSuccess: true,
+                  customIcon: Icons.signal_cellular_4_bar_outlined,
                 );
               } else if (state is ConnectivityFailure) {
                 // failure snackbar
                 AppSnackBarHelper.showSnackBar(
                   context: context,
-                  message: "No Internet Connected",
+                  message: AppTextConstants.internetFailureText,
                   isSuccess: false,
+                  customIcon: Icons.mobiledata_off_sharp,
                 );
               }
             },
@@ -72,99 +74,91 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(20),
                     child: Column(
+                      spacing: 16.h,
                       children: [
                         // Jar 1: Necessities
                         SixJarContainer(
-                          jarName: "Necessities",
+                          jarName: AppTextConstants.jarNecessitiesName,
+                          jarDescription:
+                              AppTextConstants.jarNecessitiesDescription,
                           amount: "Rs. 400",
-                          color: Colors.blueAccent,
+                          color: AppColors.necessitiesColor,
                           icon: Icons.shopping_cart,
+                          jarPercent: AppTextConstants.jarNecessitiesPercent,
+                          chartValues: [20, 30, 45, 60, 70, 90],
+                          balanceAmount: "Rs. 10,000",
+                          onAddExpense: () {
+                            
+                          },
                         ),
-                        SizedBox(height: 16.h),
 
-                        // Jar 2: Financial Freedom
+                        // Jar 2: Play
                         SixJarContainer(
-                          jarName: "Financial Freedom",
+                          jarName: AppTextConstants.jarPlayName,
+                          jarDescription: AppTextConstants.jarPlayDescription,
                           amount: "Rs. 100",
-                          color: Colors.green,
-                          icon: Icons.attach_money,
+                          color: AppColors.playColor,
+                          icon: Icons.sports_esports,
+                          jarPercent: AppTextConstants.jarPlayPercent,
+                          chartValues: [20, 30, 45, 60, 70, 90],
+                          balanceAmount: "Rs. 10,000",
+                          onAddExpense: () {},
                         ),
-                        SizedBox(height: 16.h),
 
                         // Jar 3: Education
                         SixJarContainer(
-                          jarName: "Education",
+                          jarName: AppTextConstants.jarEducationName,
+                          jarDescription:
+                              AppTextConstants.jarEducationDescription,
                           amount: "Rs. 100",
-                          color: Colors.orange,
+                          color: AppColors.educationColor,
                           icon: Icons.school,
+                          jarPercent: AppTextConstants.jarEducationPercent,
+                          chartValues: [20, 30, 45, 60, 70, 90],
+                          balanceAmount: "Rs. 10,000",
+                          onAddExpense: () {},
                         ),
-                        SizedBox(height: 16.h),
 
-                        // Jar 4: Long-term Savings
+                        // Jar 4: Savings
                         SixJarContainer(
-                          jarName: "Savings",
+                          jarName: AppTextConstants.jarSavingsName,
+                          jarDescription:
+                              AppTextConstants.jarSavingsDescription,
                           amount: "Rs. 100",
-                          color: Colors.purple,
+                          color: AppColors.savingsColor,
                           icon: Icons.savings,
+                          jarPercent: AppTextConstants.jarSavingsPercent,
+                          chartValues: [20, 30, 45, 60, 70, 90],
+                          balanceAmount: "Rs. 10,000",
+                          onAddExpense: () {},
                         ),
-                        SizedBox(height: 16.h),
 
-                        // Jar 5: Play
+                        // Jar 5: Give
                         SixJarContainer(
-                          jarName: "Play",
+                          jarName: AppTextConstants.jarGiveName,
+                          jarDescription: AppTextConstants.jarGiveDescription,
                           amount: "Rs. 100",
-                          color: Colors.redAccent,
-                          icon: Icons.sports_esports,
-                        ),
-                        SizedBox(height: 16.h),
-
-                        // Jar 6: Give
-                        SixJarContainer(
-                          jarName: "Give",
-                          amount: "Rs. 100",
-                          color: Colors.teal,
+                          color: AppColors.giveColor,
                           icon: Icons.volunteer_activism,
-                        ),
-                        SizedBox(height: 50.h),
-
-                        // Jar 6: Give
-                        SixJarContainer(
-                          jarName: "Give",
-                          amount: "Rs. 100",
-                          color: Colors.teal,
-                          icon: Icons.volunteer_activism,
+                          jarPercent: AppTextConstants.jarGivePercent,
+                          chartValues: [20, 30, 45, 60, 70, 90],
+                          balanceAmount: "Rs. 10,000",
+                          onAddExpense: () {},
                         ),
 
-                        // Jar 6: Give
+                        // Jar 6: Financial Freedom
                         SixJarContainer(
-                          jarName: "Give",
+                          jarName: AppTextConstants.jarFinancialFreedomName,
+                          jarDescription:
+                              AppTextConstants.jarFinancialFreedomDescription,
                           amount: "Rs. 100",
-                          color: Colors.teal,
-                          icon: Icons.volunteer_activism,
-                        ),
-
-                        // Jar 6: Give
-                        SixJarContainer(
-                          jarName: "Give",
-                          amount: "Rs. 100",
-                          color: Colors.teal,
-                          icon: Icons.volunteer_activism,
-                        ),
-
-                        // Jar 6: Give
-                        SixJarContainer(
-                          jarName: "Give",
-                          amount: "Rs. 100",
-                          color: Colors.teal,
-                          icon: Icons.volunteer_activism,
-                        ),
-
-                        // Jar 6: Give
-                        SixJarContainer(
-                          jarName: "Give",
-                          amount: "Rs. 100",
-                          color: Colors.teal,
-                          icon: Icons.volunteer_activism,
+                          color: AppColors.financialFreedomColor,
+                          icon: Icons.attach_money,
+                          jarPercent:
+                              AppTextConstants.jarFinancialFreedomPercent,
+                          chartValues: [20, 30, 45, 60, 70, 90],
+                          balanceAmount: "Rs. 10,000",
+                          onAddExpense: () {},
                         ),
                       ],
                     ),

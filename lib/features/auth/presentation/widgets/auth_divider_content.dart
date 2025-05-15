@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
-import 'package:six_jar/core/constants/app_text_constants.dart';
 
 class AuthDividerContent extends StatelessWidget {
-  const AuthDividerContent({super.key});
+  final String dividerTextContent;
+  const AuthDividerContent({super.key, required this.dividerTextContent});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,12 @@ class AuthDividerContent extends StatelessWidget {
 
         // Center Text
         Text(
-          AppTextConstants.orContinueWithText,
+          dividerTextContent,
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                color: AppColors.textSecondary,
-                fontWeight: FontWeight.w500,
-                fontSize: 12.sp,
-              ),
+            color: AppColors.textSecondary,
+            fontWeight: FontWeight.w500,
+            fontSize: 12.sp,
+          ),
         ),
 
         // Spacing between text and divider

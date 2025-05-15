@@ -23,7 +23,7 @@ class AuthLoginScreen extends StatefulWidget {
 
 class _AuthLoginScreenState extends State<AuthLoginScreen> {
   // form key
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
 
   // Controllers
   final TextEditingController emailAuthLoignController =
@@ -49,12 +49,12 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
             child: Form(
-              key: formKey,
+              key: formLoginKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // App name
+                  // Sign In Text
                   Text(
                     AppTextConstants.signInText,
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -116,7 +116,12 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                             // Forget Password text Btn
                             SixJarTextBtn(
                               text: "Forget Password?",
-                              onPressed: () {},
+                              onPressed: () {
+                                // Forget Password Screen
+                                GoRouter.of(context).pushNamed(
+                                  AppRouteConstants.authForgetPassword.name,
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -132,7 +137,10 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                           hint: AppTextConstants.passwordHintTextFieldText,
                           prefixIcon: Icons.lock_outline,
                           isPassword: true,
-                          autoFillHints: const [AutofillHints.password],
+                          autoFillHints: const [
+                            AutofillHints.password,
+                            AutofillHints.newPassword,
+                          ],
                         ),
                       ],
                     ),
@@ -145,7 +153,7 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                     height: 38.h,
                     width: double.infinity,
                     onPressed: () {
-                      if (formKey.currentState!.validate()) {
+                      if (formLoginKey.currentState!.validate()) {
                         AppLoggerHelper.logInfo(
                           "Form is valid. Proceed to login...",
                         );
@@ -162,11 +170,15 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                   SizedBox(height: 18.h),
 
                   // Auth Divider Content
-                  AuthDividerContent(),
+                  AuthDividerContent(
+                    dividerTextContent: AppTextConstants.orContinueWithText,
+                  ),
 
                   SizedBox(height: 18.h),
 
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: 20.w,
                     children: [
                       // Google Auth Btn
@@ -193,8 +205,8 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
 
                   // sign up
                   AuthFooter(
-                    descriptionText: "Don't have an account?",
-                    textBtnTitle: "Create Account",
+                    descriptionText: AppTextConstants.dontHaveAnAccountText,
+                    textBtnTitle: AppTextConstants.createAccountText,
                     textBtnOnTap: () {
                       // sign up screen
                       GoRouter.of(

@@ -26,7 +26,7 @@ class AuthFooter extends StatelessWidget {
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
             color: AppColors.textSecondary,
             fontWeight: FontWeight.w500,
-            fontSize: 14.sp,
+            fontSize: 13.sp,
           ),
         ),
 
@@ -41,7 +41,7 @@ class AuthFooter extends StatelessWidget {
             textBtnTitle,
             style: Theme.of(context).textTheme.headlineLarge?.copyWith(
               color: AppColors.primary,
-              fontSize: 14.sp,
+              fontSize: 13.sp,
               fontWeight: FontWeight.w500,
             ),
           ),

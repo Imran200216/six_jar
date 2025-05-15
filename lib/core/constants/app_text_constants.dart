@@ -29,20 +29,29 @@ class AppTextConstants {
   static const String sixJarAuthLoginDescriptionText =
       "Manage your finances with the six jar method";
 
-  // sign in text
+  // sign in & sign up text
   static const String signInText = "Sign In";
+  static const String signUpText = "Sign Up";
+  static const String resetPasswordText = "Reset Password";
 
   // sign in description text
   static const String signInDescriptionText =
       "Enter your email and password to access your account";
+  static const String signUpDescriptionText =
+      "Enter your details to create a new account";
+  static const String resetPasswordDescriptionText =
+      "Enter your email to receive a password reset link";
 
   // label text field
+  static const String userNameLabelText = "Name";
   static const String emailLabelText = "Email";
   static const String passwordLabelText = "Password";
   static const String forgetPasswordLabelText = "Forget Password?";
   static const String orContinueWithText = "OR CONTINUE WITH";
+  static const String orSignUpWithText = "OR SIGN UP WITH";
 
   // hint text field
+  static const String userNameHintTextFieldText = "John Doe";
   static const String emailHintTextFieldText = "yourname@example.com";
   static const String passwordHintTextFieldText = "***********";
 
@@ -57,6 +66,13 @@ class AppTextConstants {
       "Password must be at least 6 characters";
 
   // Auth Btn Title
+  static const String createAccountText = "Create Account";
   static const String googleText = "Google";
   static const String appleText = "Apple";
+  static const String sentResetLinkText = "Send Reset Link";
+  static const String backToSignInText = "Back to Sign In";
+
+  // Auth Footers Text
+  static const String dontHaveAnAccountText = "Don't have an account?";
+  static const String alreadyHaveAnAccountText = "Already have an account?";
 }

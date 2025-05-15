@@ -48,6 +48,9 @@ dependencies:
   # smooth page indicator 
   smooth_page_indicator: ^1.2.1
 
+  # Currency Picker 
+  currency_picker: ^2.0.21
+
 
 dev_dependencies:
   flutter_test:

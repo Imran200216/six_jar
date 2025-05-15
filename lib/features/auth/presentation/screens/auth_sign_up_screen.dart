@@ -175,7 +175,12 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                       // Google Auth Btn
                       Expanded(
                         child: SixJarOutlinedIconBtn(
-                          onPressed: () {},
+                          onPressed: () {
+                            // currency select
+                            GoRouter.of(
+                              context,
+                            ).pushNamed(AppRouteConstants.currencySelect.name);
+                          },
                           svgAssetPath: AppAssetsConstants.googleAuthIcon,
                           label: AppTextConstants.googleText,
                         ),

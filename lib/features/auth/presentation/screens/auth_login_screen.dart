@@ -184,7 +184,9 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                       // Google Auth Btn
                       Expanded(
                         child: SixJarOutlinedIconBtn(
-                          onPressed: () {},
+                          onPressed: () {
+                            
+                          },
                           svgAssetPath: AppAssetsConstants.googleAuthIcon,
                           label: AppTextConstants.googleText,
                         ),

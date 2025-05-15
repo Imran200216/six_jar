@@ -3,6 +3,7 @@ import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/features/auth/presentation/screens/auth_forget_password_screen.dart';
 import 'package:six_jar/features/auth/presentation/screens/auth_login_screen.dart';
 import 'package:six_jar/features/auth/presentation/screens/auth_sign_up_screen.dart';
+import 'package:six_jar/features/currency_select/presentation/screens/currency_select_screen.dart';
 import 'package:six_jar/features/home/presentation/screens/home_screen.dart';
 import 'package:six_jar/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:six_jar/features/splash/presentation/screens/splash_screen.dart';
@@ -48,6 +49,15 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.authForgetPassword.name,
       builder: (context, state) {
         return AuthForgetPasswordScreen();
+      },
+    ),
+
+    // currency select screen
+    GoRoute(
+      path: "/currencySelect",
+      name: AppRouteConstants.currencySelect.name,
+      builder: (context, state) {
+        return CurrencySelectScreen();
       },
     ),
 

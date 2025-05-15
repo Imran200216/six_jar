@@ -7,4 +7,7 @@ class AppAssetsConstants {
   // Auth Logos
   static const String googleAuthIcon = "assets/svg/google.svg";
   static const String appleAuthIcon = "assets/svg/apple.svg";
+
+  // Currency Images
+  static const String currencyPickerImg = "assets/svg/currency-picker.svg";
 }

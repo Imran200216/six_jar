@@ -9,6 +9,8 @@ enum AppRouteConstants {
   authSignUp,
   // auth forget password screen
   authForgetPassword,
+  // Currency Select Screen 
+  currencySelect,
   // home screen
   home,
 }

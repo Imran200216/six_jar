@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:six_jar/core/di/injectable.dart';
 import 'package:six_jar/core/router/app_router.dart';
 import 'package:six_jar/core/theme/app_theme.dart';
+import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart';
 
 void main() {
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
       providers: [
         // On Boarding Bloc
         BlocProvider(create: (context) => getIt<OnBoardingBloc>()),
+
+        // Currency Selected Bloc 
+        BlocProvider(create: (context) => getIt<CurrencySelectedBloc>(),)
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

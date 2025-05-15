@@ -75,4 +75,12 @@ class AppTextConstants {
   // Auth Footers Text
   static const String dontHaveAnAccountText = "Don't have an account?";
   static const String alreadyHaveAnAccountText = "Already have an account?";
+
+  // Currency Select Text
+  static const String currencySelectTitleText = "Choose Your Currency";
+  static const String currencySelectDescriptionText =
+      "Select the currency you'd like to use in the app.";
+
+  // home screen Text
+  static const String totalBalanceText = "Total Balance";
 }

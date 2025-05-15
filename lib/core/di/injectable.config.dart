@@ -11,6 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart'
+    as _i925;
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart'
     as _i578;
 
@@ -22,6 +24,9 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i578.OnBoardingBloc>(() => _i578.OnBoardingBloc());
+    gh.singleton<_i925.CurrencySelectedBloc>(
+      () => _i925.CurrencySelectedBloc(),
+    );
     return this;
   }
 }

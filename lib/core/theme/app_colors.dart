@@ -32,4 +32,12 @@ class AppColors {
   static const Color snackBarFailureBgColor = Color(0xFFFDE4E1);
   static const Color snackBarFailureTextColor = Color(0xFFF0453A);
   static const Color snackBarCloseIconColor = Color(0xFFFDE4E1);
+
+  // Jar Colors
+  static const Color necessitiesColor = Colors.blueAccent;
+  static const Color financialFreedomColor = Colors.green;
+  static const Color educationColor = Colors.orange;
+  static const Color savingsColor = Colors.purple;
+  static const Color playColor = Colors.redAccent;
+  static const Color giveColor = Colors.teal;
 }

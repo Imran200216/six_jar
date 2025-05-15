@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
+import 'package:six_jar/core/di/injectable.dart';
+import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,14 +17,34 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
-      // on boarding screen
+    // navigate screen logic
+    navigateScreen();
+
+    super.initState();
+  }
+
+  // Navigate Screen Logic
+  Future<void> navigateScreen() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    final hiveService = getIt<HiveService>();
+    final isOnBoardingCompleted = hiveService.isOnBoardingCompleted;
+    final isAuthLoggedIn = hiveService.isLoggedIn;
+
+    if (!isOnBoardingCompleted) {
+      // On Boarding Screen
       GoRouter.of(
         context,
       ).pushReplacementNamed(AppRouteConstants.onBoarding.name);
-    });
-
-    super.initState();
+    } else if (!isAuthLoggedIn) {
+      // Auth Login Screen
+      GoRouter.of(
+        context,
+      ).pushReplacementNamed(AppRouteConstants.authLogin.name);
+    } else {
+      // Home Screen
+      GoRouter.of(context).pushReplacementNamed(AppRouteConstants.home.name);
+    }
   }
 
   @override
@@ -40,6 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 AppTextConstants.appNameText,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                   color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w500,
                   fontSize: 22.sp,
                 ),
               ),
@@ -52,6 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 "${AppTextConstants.appVersionText} 1.0.0",
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                   color: AppColors.textSecondary,
+                  fontWeight: FontWeight.w400,
                   fontSize: 12.sp,
                 ),
               ),

@@ -31,7 +31,7 @@ class AppColors {
   static const Color snackBarSuccessTextColor = Color(0xFF44A246);
   static const Color snackBarFailureBgColor = Color(0xFFFDE4E1);
   static const Color snackBarFailureTextColor = Color(0xFFF0453A);
-  static const Color snackBarCloseIconColor = Color(0xFFFDE4E1);
+  static const Color snackBarCloseIconColor = Color.fromARGB(255, 106, 106, 106);
 
   // Jar Colors
   static const Color necessitiesColor = Colors.blueAccent;

@@ -4,9 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_outlined_icon_btn.dart';
+import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_assets.constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
+import 'package:six_jar/core/di/injectable.dart';
+import 'package:six_jar/core/helper/app_logger_helper.dart';
+import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
+import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart';
 import 'package:six_jar/features/on_boarding/presentation/widgets/on_boarding.dart';
@@ -36,9 +41,39 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => OnBoardingBloc(),
-      child: _OnBoardingScreenContent(pageController: pageController),
+    return MultiBlocProvider(
+      providers: [
+        // On Boarding Bloc
+        BlocProvider(create: (context) => OnBoardingBloc()),
+
+        // Internect Connectivity Bloc
+        BlocProvider(create: (context) => ConnectivityBloc()),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          // Internet Connectivity Listener
+          BlocListener<ConnectivityBloc, ConnectivityState>(
+            listener: (context, state) {
+              if (state is ConnectivitySuccess) {
+                // success snackbar
+                AppSnackBarHelper.showSnackBar(
+                  context: context,
+                  message: "Internet Connected",
+                  isSuccess: true,
+                );
+              } else if (state is ConnectivityFailure) {
+                // failure snackbar
+                AppSnackBarHelper.showSnackBar(
+                  context: context,
+                  message: "No Internet Connected",
+                  isSuccess: false,
+                );
+              }
+            },
+          ),
+        ],
+        child: _OnBoardingScreenContent(pageController: pageController),
+      ),
     );
   }
 }
@@ -116,13 +151,23 @@ class _OnBoardingScreenContentState extends State<_OnBoardingScreenContent> {
                   return SixJarFilledIconBtn(
                     height: 38.h,
                     width: double.infinity,
-                    onPressed: () {
+                    onPressed: () async {
                       if (currentPage < 2) {
                         widget.pageController.nextPage(
                           duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         );
                       } else {
+                        // Hive OnBoarding Status
+                        final hiveService = getIt<HiveService>();
+                        await hiveService.setOnBoardingCompleted(true);
+
+                        // Logger
+                        AppLoggerHelper.logInfo(
+                          "✅ Onboarding completed status saved in Hive.",
+                        );
+
+                        // Login Screen
                         GoRouter.of(context).pushReplacementNamed(
                           AppRouteConstants.authLogin.name,
                         );
@@ -146,18 +191,23 @@ class _OnBoardingScreenContentState extends State<_OnBoardingScreenContent> {
           },
           controller: widget.pageController,
           children: [
+            // On Boarding First Screen
             OnBoarding(
               onBoardingTitleText: AppTextConstants.onBoardingFirstTitleText,
               onBoardingSubTitleText:
                   AppTextConstants.onBoardingFirstSubTitleText,
               onBoardingSvgPath: AppAssetsConstants.onBoardingFirstImg,
             ),
+
+            // On Boarding Second Screen
             OnBoarding(
               onBoardingTitleText: AppTextConstants.onBoardingSecondTitleText,
               onBoardingSubTitleText:
                   AppTextConstants.onBoardingSecondSubTitleText,
               onBoardingSvgPath: AppAssetsConstants.onBoardingSecondImg,
             ),
+
+            // On Boarding Third Screen
             OnBoarding(
               onBoardingTitleText: AppTextConstants.onBoardingThirdTitleText,
               onBoardingSubTitleText:

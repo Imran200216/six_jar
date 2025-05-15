@@ -39,18 +39,20 @@ dependencies:
   get_it: ^8.0.3
   injectable: ^2.5.0
 
-  # dot env 
+  # dot env
   flutter_dotenv: ^5.2.1
 
-  # logger 
+  # logger
   logger: ^2.5.0
 
-  # smooth page indicator 
+  # smooth page indicator
   smooth_page_indicator: ^1.2.1
 
-  # Currency Picker 
+  # Currency Picker
   currency_picker: ^2.0.21
 
+  # internet checker
+  connectivity_plus: ^6.1.4
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +63,7 @@ dev_dependencies:
   # retrofit generator
   retrofit_generator: ^9.2.0
 
-  # injectable generator 
+  # injectable generator
   injectable_generator: ^2.7.0
 
   # build runner
@@ -73,9 +75,6 @@ flutter:
   assets:
     - assets/svg/
     - assets/font/Poppins/
-    
-
-   
 
   fonts:
     - family: Poppins
@@ -88,5 +87,3 @@ flutter:
           weight: 600
         - asset: assets/font/Poppins/Poppins-Bold.ttf
           weight: 700
-
-

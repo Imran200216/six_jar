@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:six_jar/core/theme/app_colors.dart'; 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:six_jar/core/theme/app_colors.dart';
 
 class AppSnackBarHelper {
   static void showSnackBar({
@@ -8,6 +9,15 @@ class AppSnackBarHelper {
     required bool isSuccess,
   }) {
     final snackBar = SnackBar(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: isSuccess
+          ? AppColors.snackBarSuccessBgColor
+          : AppColors.snackBarFailureBgColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4.r),
+      ),
+      margin:  EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      duration: const Duration(seconds: 4),
       content: Row(
         children: [
           Icon(
@@ -16,7 +26,7 @@ class AppSnackBarHelper {
                 ? AppColors.snackBarSuccessTextColor
                 : AppColors.snackBarFailureTextColor,
           ),
-          const SizedBox(width: 8),
+          SizedBox(width: 8.w),
           Expanded(
             child: Text(
               message,
@@ -25,26 +35,21 @@ class AppSnackBarHelper {
                 color: isSuccess
                     ? AppColors.snackBarSuccessTextColor
                     : AppColors.snackBarFailureTextColor,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
+          IconButton(
+            icon: Icon(
+              Icons.close,
+              size: 20.w,
+              color: AppColors.snackBarCloseIconColor,
+            ),
+            onPressed: () {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            },
+          ),
         ],
-      ),
-      backgroundColor: isSuccess
-          ? AppColors.snackBarSuccessBgColor
-          : AppColors.snackBarFailureBgColor,
-      behavior: SnackBarBehavior.floating,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      action: SnackBarAction(
-        label: 'Close',
-        textColor: AppColors.snackBarCloseIconColor,
-        onPressed: () {
-          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-        },
       ),
     );
 

@@ -159,7 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 pinned: true,
                 expandedHeight: 300.h,
                 backgroundColor: AppColors.primary,
-
                 leading: Builder(
                   builder: (context) {
                     return IconButton(

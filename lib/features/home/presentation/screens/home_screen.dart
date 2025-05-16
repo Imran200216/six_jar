@@ -119,18 +119,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           backgroundColor: AppColors.background,
           drawer: SixJarDrawer(
-            userName: 'John Doe',
-            userEmail: 'john.doe@example.com',
-            userImageUrl: 'https://via.placeholder.com/150',
-            onHomeTap: () {
-              // Handle home navigation logic
-            },
-            onSettingsTap: () {
-              // Handle settings navigation
-            },
-            onLogoutTap: () {
-              // Handle logout logic
-            },
+            userName: 'Ijass',
+            userEmail: 'Ijassmohammed@gmail.com',
+            userImageUrl:
+                'https://images.unsplash.com/photo-1503443207922-dff7d543fd0e?q=80&w=2427&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            onHomeTap: () {},
+            onAboutTap: () {},
+            onSettingsTap: () {},
+            onLogoutTap: () {},
           ),
 
           body: CustomScrollView(

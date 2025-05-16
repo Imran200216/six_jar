@@ -24,6 +24,8 @@ class AppTextConstants {
   static const String skipText = "Skip";
   // Continue
   static const String continueText = "Continue";
+  // cancel
+  static const String cancelText = "Cancel";
 
   // auth description text
   static const String sixJarAuthLoginDescriptionText =
@@ -122,4 +124,10 @@ class AppTextConstants {
   static const String jarDistributionText = "Jar Distribution";
   static const String jarDistributionDescriptionText =
       "How your money is distributed";
+
+  // Log out
+  static const String logoutTitle = "Taking a break?";
+  static const String logoutSubTitle =
+      "Don’t worry, everything will be just as you left it.";
+  static const String logout = "Logout";
 }

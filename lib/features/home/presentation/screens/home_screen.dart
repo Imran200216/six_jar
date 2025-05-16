@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
+import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
@@ -9,6 +11,7 @@ import 'package:six_jar/features/home/presentation/widgets/six_jar_chart_diagram
 import 'package:six_jar/features/home/presentation/widgets/six_jar_container.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_drawer.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_expense_bottom_sheet.dart';
+import 'package:six_jar/features/home/presentation/widgets/six_jar_logout_bottom_modal_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -124,9 +127,27 @@ class _HomeScreenState extends State<HomeScreen> {
             userImageUrl:
                 'https://images.unsplash.com/photo-1503443207922-dff7d543fd0e?q=80&w=2427&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
             onHomeTap: () {},
-            onAboutTap: () {},
-            onSettingsTap: () {},
-            onLogoutTap: () {},
+            onMyExpenseTap: () {
+              // Expense Screen
+              GoRouter.of(context).pushNamed(AppRouteConstants.myExpense.name);
+            },
+            onAboutTap: () {
+              // About Screen
+              GoRouter.of(context).pushNamed(AppRouteConstants.about.name);
+            },
+            onSettingsTap: () {
+              // Settings Screen
+              GoRouter.of(context).pushNamed(AppRouteConstants.settting.name);
+            },
+            onLogoutTap: () {
+              // Log out bottom modal sheet
+              showSixJarLogoutBottomSheet(
+                context: context,
+                onConfirmLogout: () {
+                  // Logout logic
+                },
+              );
+            },
           ),
 
           body: CustomScrollView(

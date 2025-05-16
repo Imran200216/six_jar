@@ -13,4 +13,10 @@ enum AppRouteConstants {
   currencySelect,
   // home screen
   home,
+  // about screen 
+  about,
+  // my expense screen 
+  myExpense,
+  // settings screen 
+  settting,
 }

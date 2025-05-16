@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
+import 'package:six_jar/core/constants/app_assets.constants.dart';
+import 'package:six_jar/core/constants/app_text_constants.dart';
+import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_outlined_icon_btn.dart';
-import 'package:six_jar/commons/Widgets/six_jar_text_field.dart';
-import 'package:six_jar/core/theme/app_colors.dart';
 
-void showSixJarAddExpenseBottomSheet({
+void showSixJarLogoutBottomSheet({
   required BuildContext context,
-  required TextEditingController amountController,
-  required TextEditingController descriptionController,
-  required VoidCallback onAddExpense,
-  String title = "Necessities",
+  required VoidCallback onConfirmLogout,
 }) {
   showModalBottomSheet(
     context: context,
-    isScrollControlled: true,
     backgroundColor: AppColors.transparentColor,
+    isScrollControlled: true, 
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
     ),
@@ -27,53 +26,70 @@ void showSixJarAddExpenseBottomSheet({
           color: AppColors.background,
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
         ),
+        // Remove the fixed-height SizedBox
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+          padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 30.h),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Lottie Animation - Adjust size to prevent overflow
+              Lottie.asset(
+                AppAssetsConstants.logOutLottie,
+                height: 240.h, // Reduced from 280.h
+                width: 240.w, // Reduced from 280.w
+                fit: BoxFit.cover,
+                animate: true,
+              ),
+
+              // Title
               Text(
-                "Add Expense from $title",
+                AppTextConstants.logoutTitle,
+                textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                   color: AppColors.textPrimary,
-                  fontSize: 14.sp,
+                  fontSize: 16.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(height: 30.h),
-              SixJarTextField(
-                textFieldLabel: "Expense Amount",
-                keyboardType: TextInputType.number,
-                controller: amountController,
-                hint: "0.00",
-                prefixIcon: Icons.attach_money,
-              ),
+
               SizedBox(height: 12.h),
-              SixJarTextField(
-                textFieldLabel: "Description",
-                keyboardType: TextInputType.text,
-                controller: descriptionController,
-                hint: "What was this expense for?",
-                prefixIcon: Icons.description,
-                maxLines: 4,
+
+              // Description
+              Text(
+                AppTextConstants.logoutSubTitle,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  color: AppColors.textSecondary,
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
+
               SizedBox(height: 30.h),
+
+              // Logout Button
               SixJarFilledIconBtn(
                 width: double.infinity,
                 height: 34.h,
-                onPressed: onAddExpense,
-                icon: Icons.add_outlined,
-                label: "Add Expense",
+                onPressed: onConfirmLogout,
+                icon: Icons.logout,
+                label: AppTextConstants.logout,
               ),
+
               SizedBox(height: 12.h),
+
+              // Cancel Button
               SixJarOutlinedIconBtn(
                 width: double.infinity,
                 borderColor: AppColors.textSecondary,
                 height: 34.h,
-                onPressed: () => GoRouter.of(context).pop(),
+                onPressed: () {
+                  // cancel
+                  GoRouter.of(context).pop();
+                },
                 iconData: Icons.cancel_outlined,
-                label: "Cancel",
+                label: AppTextConstants.cancelText,
               ),
             ],
           ),

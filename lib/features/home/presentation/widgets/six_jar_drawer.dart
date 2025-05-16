@@ -16,6 +16,7 @@ class SixJarDrawer extends StatefulWidget {
   final VoidCallback onSettingsTap;
   final VoidCallback onLogoutTap;
   final VoidCallback onAboutTap;
+  final VoidCallback onMyExpenseTap;
 
   const SixJarDrawer({
     super.key,
@@ -26,6 +27,7 @@ class SixJarDrawer extends StatefulWidget {
     required this.onSettingsTap,
     required this.onLogoutTap,
     required this.onAboutTap,
+    required this.onMyExpenseTap,
   });
 
   @override
@@ -55,7 +57,14 @@ class _SixJarDrawerState extends State<SixJarDrawer> {
             drawerIcon: Icons.info,
           ),
 
-          // About
+          // My Expenses
+          SixJarDrawerListTile(
+            onTap: widget.onMyExpenseTap,
+            drawerTitle: "My Expense",
+            drawerIcon: Icons.wallet_rounded,
+          ),
+
+          // Settings
           SixJarDrawerListTile(
             onTap: widget.onSettingsTap,
             drawerTitle: "Settings",

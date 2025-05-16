@@ -14,4 +14,7 @@ class AppAssetsConstants {
   // Profile Placeholderr Image
   static const String profilePlaceHolderImg =
       "assets/jpg/profile-placeholder.jpeg";
+
+  // Logout Lottie
+  static const logOutLottie = "assets/lottie/log-out.json";
 }

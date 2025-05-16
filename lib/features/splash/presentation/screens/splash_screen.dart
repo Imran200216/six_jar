@@ -25,11 +25,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   // Navigate Screen Logic
   Future<void> navigateScreen() async {
+    // timer
     await Future.delayed(const Duration(seconds: 2));
 
+    // Hive status
     final hiveService = getIt<HiveService>();
     final isOnBoardingCompleted = hiveService.isOnBoardingCompleted;
     final isAuthLoggedIn = hiveService.isLoggedIn;
+    final isCurrencySelected = hiveService.isCurrencySelected;
 
     if (!isOnBoardingCompleted) {
       // On Boarding Screen
@@ -41,6 +44,11 @@ class _SplashScreenState extends State<SplashScreen> {
       GoRouter.of(
         context,
       ).pushReplacementNamed(AppRouteConstants.authLogin.name);
+    } else if (!isCurrencySelected) {
+      // Currency Select Screen
+      GoRouter.of(
+        context,
+      ).pushReplacementNamed(AppRouteConstants.currencySelect.name);
     } else {
       // Home Screen
       GoRouter.of(context).pushReplacementNamed(AppRouteConstants.home.name);

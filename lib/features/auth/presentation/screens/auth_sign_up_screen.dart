@@ -230,7 +230,18 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                           // Google Auth Btn
                           Expanded(
                             child: SixJarOutlinedIconBtn(
-                              onPressed: () {
+                              onPressed: () async {
+                                // Hive Auth Logged Status
+                                final hiveService = getIt<HiveService>();
+                                await hiveService.setLoggedIn(true);
+
+                                // Google Auth Sign Logic
+
+                                // Logger
+                                AppLoggerHelper.logInfo(
+                                  "✅ Auth Logged status saved in Hive.",
+                                );
+
                                 // currency select
                                 GoRouter.of(context).pushNamed(
                                   AppRouteConstants.currencySelect.name,

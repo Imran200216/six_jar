@@ -9,7 +9,10 @@ import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_assets.constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
+import 'package:six_jar/core/di/injectable.dart';
+import 'package:six_jar/core/helper/app_logger_helper.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
+import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
 import 'package:six_jar/features/currency_select/presentation/widgets/six_jar_currency_text_field.dart';
@@ -33,7 +36,7 @@ class CurrencySelectScreen extends StatelessWidget {
                 // success snackbar
                 AppSnackBarHelper.showSnackBar(
                   context: context,
-                  message:  AppTextConstants.internetSuccessText,
+                  message: AppTextConstants.internetSuccessText,
                   isSuccess: true,
                   customIcon: Icons.signal_cellular_4_bar_outlined,
                 );
@@ -114,10 +117,16 @@ class CurrencySelectScreen extends StatelessWidget {
                               ),
                             ),
                             onSelect: (Currency currency) {
+                              // Currency Selected Bloc
                               context.read<CurrencySelectedBloc>().add(
                                 CurrencyUserSelectedEvent(
-                                  "////${currency.name} (${currency.code})",
+                                  "${currency.name} (${currency.code})",
                                 ),
+                              );
+
+                              // Logger
+                              AppLoggerHelper.logInfo(
+                                "💵 Currency Selected Successfully 💵",
                               );
                             },
                           );
@@ -135,7 +144,16 @@ class CurrencySelectScreen extends StatelessWidget {
                         return SixJarFilledIconBtn(
                           height: 36.h,
                           width: double.infinity,
-                          onPressed: () {
+                          onPressed: () async {
+                            // Hive Currency Selected Status
+                            final hiveService = getIt<HiveService>();
+                            await hiveService.setCurrencySelected(true);
+
+                            // Logger
+                            AppLoggerHelper.logInfo(
+                              "✅ Currency Selected status saved in Hive.",
+                            );
+
                             // Home Screen
                             GoRouter.of(
                               context,

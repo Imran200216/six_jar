@@ -27,11 +27,6 @@ class AppLoggerHelper {
     _logger.e("Error: $error", error: error, stackTrace: stackTrace);
   }
 
-  /// Log verbose/debug messages
-  static void logDebug(String message) {
-    _logger.v(message);
-  }
-
   /// Log warning
   static void logWarning(String message) {
     _logger.w(message);

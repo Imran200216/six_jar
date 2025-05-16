@@ -6,9 +6,81 @@ import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_container.dart';
+import 'package:six_jar/features/home/presentation/widgets/six_jar_expense_bottom_sheet.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // Controllers
+  final TextEditingController necessitiesExpenseAmountController =
+      TextEditingController();
+
+  final TextEditingController necessitiesExpenseDescriptionController =
+      TextEditingController();
+
+  final TextEditingController playExpenseAmountController =
+      TextEditingController();
+
+  final TextEditingController playExpenseDescriptionController =
+      TextEditingController();
+
+  final TextEditingController educationExpenseAmountController =
+      TextEditingController();
+
+  final TextEditingController educationExpenseDescriptionController =
+      TextEditingController();
+
+  final TextEditingController savingsExpenseAmountController =
+      TextEditingController();
+
+  final TextEditingController savingsExpenseDescriptionController =
+      TextEditingController();
+
+  final TextEditingController giveExpenseAmountController =
+      TextEditingController();
+
+  final TextEditingController giveExpenseDescriptionController =
+      TextEditingController();
+
+  final TextEditingController financialFreedomExpenseAmountController =
+      TextEditingController();
+
+  final TextEditingController financialFreedomExpenseDescriptionController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    // Necessities
+    necessitiesExpenseAmountController.dispose();
+    necessitiesExpenseDescriptionController.dispose();
+
+    // Play
+    playExpenseAmountController.dispose();
+    playExpenseDescriptionController.dispose();
+
+    // Education
+    educationExpenseAmountController.dispose();
+    educationExpenseDescriptionController.dispose();
+
+    // Savings
+    savingsExpenseAmountController.dispose();
+    savingsExpenseDescriptionController.dispose();
+
+    // Give
+    giveExpenseAmountController.dispose();
+    giveExpenseDescriptionController.dispose();
+
+    // Financial Freedom
+    financialFreedomExpenseAmountController.dispose();
+    financialFreedomExpenseDescriptionController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +160,16 @@ class HomeScreen extends StatelessWidget {
                           chartValues: [20, 30, 45, 60, 70, 90],
                           balanceAmount: "Rs. 10,000",
                           onAddExpense: () {
-                            
+                            // Bottom Modal Sheet
+                            showSixJarAddExpenseBottomSheet(
+                              context: context,
+                              title: AppTextConstants.jarNecessitiesName,
+                              amountController:
+                                  necessitiesExpenseAmountController,
+                              descriptionController:
+                                  necessitiesExpenseDescriptionController,
+                              onAddExpense: () {},
+                            );
                           },
                         ),
 
@@ -102,7 +183,17 @@ class HomeScreen extends StatelessWidget {
                           jarPercent: AppTextConstants.jarPlayPercent,
                           chartValues: [20, 30, 45, 60, 70, 90],
                           balanceAmount: "Rs. 10,000",
-                          onAddExpense: () {},
+                          onAddExpense: () {
+                            // Bottom Modal Sheet
+                            showSixJarAddExpenseBottomSheet(
+                              context: context,
+                              title: AppTextConstants.jarPlayName,
+                              amountController: playExpenseAmountController,
+                              descriptionController:
+                                  playExpenseDescriptionController,
+                              onAddExpense: () {},
+                            );
+                          },
                         ),
 
                         // Jar 3: Education
@@ -116,7 +207,18 @@ class HomeScreen extends StatelessWidget {
                           jarPercent: AppTextConstants.jarEducationPercent,
                           chartValues: [20, 30, 45, 60, 70, 90],
                           balanceAmount: "Rs. 10,000",
-                          onAddExpense: () {},
+                          onAddExpense: () {
+                            // Bottom Modal Sheet
+                            showSixJarAddExpenseBottomSheet(
+                              context: context,
+                              title: AppTextConstants.jarEducationName,
+                              amountController:
+                                  educationExpenseAmountController,
+                              descriptionController:
+                                  educationExpenseDescriptionController,
+                              onAddExpense: () {},
+                            );
+                          },
                         ),
 
                         // Jar 4: Savings
@@ -130,7 +232,17 @@ class HomeScreen extends StatelessWidget {
                           jarPercent: AppTextConstants.jarSavingsPercent,
                           chartValues: [20, 30, 45, 60, 70, 90],
                           balanceAmount: "Rs. 10,000",
-                          onAddExpense: () {},
+                          onAddExpense: () {
+                            // Bottom Modal Sheet
+                            showSixJarAddExpenseBottomSheet(
+                              context: context,
+                              title: AppTextConstants.jarSavingsName,
+                              amountController: savingsExpenseAmountController,
+                              descriptionController:
+                                  savingsExpenseDescriptionController,
+                              onAddExpense: () {},
+                            );
+                          },
                         ),
 
                         // Jar 5: Give
@@ -143,7 +255,17 @@ class HomeScreen extends StatelessWidget {
                           jarPercent: AppTextConstants.jarGivePercent,
                           chartValues: [20, 30, 45, 60, 70, 90],
                           balanceAmount: "Rs. 10,000",
-                          onAddExpense: () {},
+                          onAddExpense: () {
+                            // Bottom Modal Sheet
+                            showSixJarAddExpenseBottomSheet(
+                              context: context,
+                              title: AppTextConstants.jarGiveName,
+                              amountController: giveExpenseAmountController,
+                              descriptionController:
+                                  giveExpenseDescriptionController,
+                              onAddExpense: () {},
+                            );
+                          },
                         ),
 
                         // Jar 6: Financial Freedom
@@ -158,7 +280,18 @@ class HomeScreen extends StatelessWidget {
                               AppTextConstants.jarFinancialFreedomPercent,
                           chartValues: [20, 30, 45, 60, 70, 90],
                           balanceAmount: "Rs. 10,000",
-                          onAddExpense: () {},
+                          onAddExpense: () {
+                            // Bottom Modal Sheet
+                            showSixJarAddExpenseBottomSheet(
+                              context: context,
+                              title: AppTextConstants.jarFinancialFreedomName,
+                              amountController:
+                                  financialFreedomExpenseAmountController,
+                              descriptionController:
+                                  financialFreedomExpenseDescriptionController,
+                              onAddExpense: () {},
+                            );
+                          },
                         ),
                       ],
                     ),

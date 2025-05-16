@@ -8,6 +8,8 @@ class HiveService {
   late Box<bool> _authStatusBox;
   // OnBoarding Status Box
   late Box<bool> _onBoardingStatusBox;
+  // Currency Selected Status Box
+  late Box<bool> _onCurrencySelectedStatusBox;
 
   Future<void> init() async {
     // initialize flutter
@@ -16,6 +18,9 @@ class HiveService {
     // Open boxes, specify type as bool to enforce type safety
     _authStatusBox = await Hive.openBox<bool>('authStatusBox');
     _onBoardingStatusBox = await Hive.openBox<bool>('onBoardingStatusBox');
+    _onCurrencySelectedStatusBox = await Hive.openBox<bool>(
+      'onCurrencySelectedStatusBox',
+    );
 
     // Initialize defaults if not set yet
     if (!_authStatusBox.containsKey('isLoggedIn')) {
@@ -24,9 +29,14 @@ class HiveService {
     if (!_onBoardingStatusBox.containsKey('isCompleted')) {
       await _onBoardingStatusBox.put('isCompleted', false);
     }
+    if (!_onCurrencySelectedStatusBox.containsKey('isCurrencySelected')) {
+      await _onCurrencySelectedStatusBox.put('isCurrencySelected', false);
+    }
 
     // Log success
-    AppLoggerHelper.logInfo('HiveService: Hive boxes initialized successfully');
+    AppLoggerHelper.logInfo(
+      '💥 HiveService: Hive boxes initialized successfully 💥',
+    );
   }
 
   // Read auth status
@@ -46,12 +56,28 @@ class HiveService {
     await _onBoardingStatusBox.put('isCompleted', value);
   }
 
-  // Optional: Clear statuses if needed
+  // Read currency selected status
+  bool get isCurrencySelected => _onCurrencySelectedStatusBox.get(
+    'isCurrencySelected',
+    defaultValue: false,
+  )!;
+
+  // Set currency selected status
+  Future<void> setCurrencySelected(bool value) async {
+    await _onCurrencySelectedStatusBox.put('isCurrencySelected', value);
+  }
+
+  // Clear statuses if needed
   Future<void> clearAuthStatus() async {
     await _authStatusBox.put('isLoggedIn', false);
   }
 
   Future<void> clearOnBoardingStatus() async {
     await _onBoardingStatusBox.put('isCompleted', false);
+  }
+
+  // Clear currency selected status
+  Future<void> clearCurrencySelectedStatus() async {
+    await _onCurrencySelectedStatusBox.put('isCurrencySelected', false);
   }
 }

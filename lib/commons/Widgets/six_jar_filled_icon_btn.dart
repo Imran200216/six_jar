@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:six_jar/core/helper/app_haptics_helper.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 
 class SixJarFilledIconBtn extends StatelessWidget {
@@ -22,13 +23,21 @@ class SixJarFilledIconBtn extends StatelessWidget {
     this.btnFontSize,
   });
 
+  void _handleTap() {
+
+    AppHapticHelper.heavyImpact();   
+    if (onPressed != null) {
+      onPressed!();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width,
       height: height ?? 48.h,
       child: ElevatedButton.icon(
-        onPressed: isLoading ? null : onPressed,
+        onPressed: isLoading ? null : _handleTap,
         icon: isLoading
             ? SizedBox(
                 width: 20.w,
@@ -44,10 +53,10 @@ class SixJarFilledIconBtn extends StatelessWidget {
         label: Text(
           isLoading ? "Loading..." : label,
           style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-            color: AppColors.background,
-            fontWeight: FontWeight.w500,
-            fontSize: btnFontSize ?? 13.sp,
-          ),
+                color: AppColors.background,
+                fontWeight: FontWeight.w500,
+                fontSize: btnFontSize ?? 13.sp,
+              ),
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,

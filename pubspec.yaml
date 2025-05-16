@@ -57,6 +57,13 @@ dependencies:
   # Charts 
   fl_chart: ^1.0.0
 
+  # Package info plus 
+  package_info_plus: ^8.3.0
+
+  # Cached network image 
+  cached_network_image: ^3.4.1
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -77,6 +84,7 @@ flutter:
 
   assets:
     - assets/svg/
+    - assets/jpg/
     - assets/font/Poppins/
 
   fonts:

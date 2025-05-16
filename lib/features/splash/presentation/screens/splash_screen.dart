@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
@@ -6,6 +7,7 @@ import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/di/injectable.dart';
 import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
+import 'package:six_jar/features/splash/presentation/bloc/app_version_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,6 +19,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    // Trigger fetching app version
+    context.read<AppVersionBloc>().add(FetchAppVersionEvent());
+
     // navigate screen logic
     navigateScreen();
 
@@ -77,16 +82,24 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
 
             // App Version
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                "${AppTextConstants.appVersionText} 1.0.0",
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                  color: AppColors.textSecondary,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12.sp,
-                ),
-              ),
+            BlocBuilder<AppVersionBloc, AppVersionState>(
+              builder: (context, state) {
+                String versionText = '';
+                if (state is AppVersionLoaded) {
+                  versionText = state.version;
+                }
+                return Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    "${AppTextConstants.appVersionText} $versionText",
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                      color: AppColors.textSecondary,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

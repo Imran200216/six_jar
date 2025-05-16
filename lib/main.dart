@@ -9,6 +9,7 @@ import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_theme.dart';
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart';
+import 'package:six_jar/features/splash/presentation/bloc/app_version_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        // App Version Bloc 
+        BlocProvider(create: (context) => getIt<AppVersionBloc>(),),
+
         // On Boarding Bloc
         BlocProvider(create: (context) => getIt<OnBoardingBloc>()),
 

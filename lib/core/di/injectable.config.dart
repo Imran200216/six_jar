@@ -17,6 +17,8 @@ import 'package:six_jar/features/currency_select/presentation/bloc/currency_sele
     as _i925;
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart'
     as _i578;
+import 'package:six_jar/features/splash/presentation/bloc/app_version_bloc.dart'
+    as _i93;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -27,6 +29,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i578.OnBoardingBloc>(() => _i578.OnBoardingBloc());
     gh.singleton<_i268.ConnectivityBloc>(() => _i268.ConnectivityBloc());
+    gh.singleton<_i93.AppVersionBloc>(() => _i93.AppVersionBloc());
     gh.singleton<_i925.CurrencySelectedBloc>(
       () => _i925.CurrencySelectedBloc(),
     );

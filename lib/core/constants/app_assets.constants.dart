@@ -10,4 +10,8 @@ class AppAssetsConstants {
 
   // Currency Images
   static const String currencyPickerImg = "assets/svg/currency-picker.svg";
+
+  // Profile Placeholderr Image
+  static const String profilePlaceHolderImg =
+      "assets/jpg/profile-placeholder.jpeg";
 }

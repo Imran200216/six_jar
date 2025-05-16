@@ -48,4 +48,7 @@ class AppColors {
   static const Color savingsColor = Colors.purple;
   static const Color playColor = Colors.redAccent;
   static const Color giveColor = Colors.teal;
+
+
+
 }

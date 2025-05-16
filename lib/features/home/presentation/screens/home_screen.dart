@@ -5,7 +5,9 @@ import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
+import 'package:six_jar/features/home/presentation/widgets/six_jar_chart_diagram.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_container.dart';
+import 'package:six_jar/features/home/presentation/widgets/six_jar_drawer.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_expense_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -116,6 +118,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         child: Scaffold(
           backgroundColor: AppColors.background,
+          drawer: SixJarDrawer(
+            userName: 'John Doe',
+            userEmail: 'john.doe@example.com',
+            userImageUrl: 'https://via.placeholder.com/150',
+            onHomeTap: () {
+              // Handle home navigation logic
+            },
+            onSettingsTap: () {
+              // Handle settings navigation
+            },
+            onLogoutTap: () {
+              // Handle logout logic
+            },
+          ),
+
           body: CustomScrollView(
             physics: const BouncingScrollPhysics(),
             slivers: [
@@ -125,7 +142,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 pinned: true,
                 expandedHeight: 300.h,
                 backgroundColor: AppColors.primary,
-                leading: Icon(Icons.menu, color: AppColors.background),
+
+                leading: Builder(
+                  builder: (context) {
+                    return IconButton(
+                      icon: Icon(Icons.menu, color: AppColors.background),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                    );
+                  },
+                ),
+
                 flexibleSpace: FlexibleSpaceBar(
                   title: Text(
                     AppTextConstants.appNameText,
@@ -293,6 +321,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                         ),
+
+                        // Jar Distribution
+                        SixJarChartDiagram(),
                       ],
                     ),
                   ),

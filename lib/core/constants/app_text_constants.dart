@@ -90,7 +90,7 @@ class AppTextConstants {
   static const String internetFailureText =
       "You're offline. Reconnect to the internet to continue.";
 
- // Jar Names
+  // Jar Names
   static const String jarNecessitiesName = "Necessities";
   static const String jarPlayName = "Play";
   static const String jarEducationName = "Education";
@@ -105,10 +105,8 @@ class AppTextConstants {
       "Entertainment, dining out, fun activities";
   static const String jarEducationDescription =
       "Books, courses, learning materials";
-  static const String jarSavingsDescription =
-      "Big future purchases and goals";
-  static const String jarGiveDescription =
-      "Giving back to others";
+  static const String jarSavingsDescription = "Big future purchases and goals";
+  static const String jarGiveDescription = "Giving back to others";
   static const String jarFinancialFreedomDescription =
       "Investments and passive income";
 
@@ -119,4 +117,9 @@ class AppTextConstants {
   static const String jarSavingsPercent = "10%";
   static const String jarGivePercent = "5%";
   static const String jarFinancialFreedomPercent = "10%";
+
+  // Jar Distribution
+  static const String jarDistributionText = "Jar Distribution";
+  static const String jarDistributionDescriptionText =
+      "How your money is distributed";
 }

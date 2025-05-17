@@ -10,7 +10,8 @@ import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/core/theme/app_theme.dart';
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
-import 'package:six_jar/features/my_expense/presentation/bloc/jar_selection_bloc.dart';
+import 'package:six_jar/features/my_expense/presentation/blocs/jar_selection_bloc/jar_selection_bloc.dart';
+import 'package:six_jar/features/my_expense/presentation/blocs/range_slider_bloc/range_slider_bloc.dart';
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart';
 import 'package:six_jar/features/splash/presentation/bloc/app_version_bloc.dart';
 
@@ -59,8 +60,11 @@ class MyApp extends StatelessWidget {
         // Connectivity Bloc
         BlocProvider(create: (context) => getIt<ConnectivityBloc>()),
 
-        // Jar Selection Bloc 
-        BlocProvider(create: (context) => getIt<JarSelectionBloc>(),)
+        // Jar Selection Bloc
+        BlocProvider(create: (context) => getIt<JarSelectionBloc>()),
+
+        // Range Slider Bloc
+        BlocProvider(create: (context) => getIt<RangeSliderBloc>()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

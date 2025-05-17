@@ -158,4 +158,5 @@ class AppTextConstants {
   static const String to = "To";
   static const String clearAll = "Clear All";
   static const String selectCategory = "Select Category";
+  static const String searchAmount = "Search Amount";
 }

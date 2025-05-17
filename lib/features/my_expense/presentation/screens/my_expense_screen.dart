@@ -45,12 +45,14 @@ class _MyExpenseScreenState extends State<MyExpenseScreen> {
         listeners: [
           BlocListener<JarSelectionBloc, JarSelectionState>(
             listener: (context, state) {
-              // Success Added snackbar
-              AppSnackBarHelper.showSnackBar(
-                context: context,
-                message: "${state.selectedJar} is Added To filter category",
-                isSuccess: true,
-              );
+              if (state.selectedJar.isNotEmpty) {
+                // Success Added snackbar
+                AppSnackBarHelper.showSnackBar(
+                  context: context,
+                  message: "${state.selectedJar} is Added To filter category",
+                  isSuccess: true,
+                );
+              }
             },
           ),
         ],

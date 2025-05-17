@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
@@ -58,8 +59,39 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController financialFreedomExpenseDescriptionController =
       TextEditingController();
 
+  // Scroll controler
+  final ScrollController _scrollController = ScrollController();
+  bool _isCollapsed = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    // Adjust the value 250 to match your expandedHeight threshold
+    if (_scrollController.hasClients &&
+        _scrollController.offset > 250 &&
+        !_isCollapsed) {
+      setState(() {
+        _isCollapsed = true;
+      });
+    } else if (_scrollController.hasClients &&
+        _scrollController.offset <= 250 &&
+        _isCollapsed) {
+      setState(() {
+        _isCollapsed = false;
+      });
+    }
+  }
+
   @override
   void dispose() {
+    // Scroll Controller
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+
     // Necessities
     necessitiesExpenseAmountController.dispose();
     necessitiesExpenseDescriptionController.dispose();
@@ -151,9 +183,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           body: CustomScrollView(
+            controller: _scrollController,
             physics: const BouncingScrollPhysics(),
             slivers: [
-              // App Bar
               SliverAppBar(
                 floating: false,
                 pinned: true,
@@ -169,18 +201,132 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                 ),
-
                 flexibleSpace: FlexibleSpaceBar(
-                  title: Text(
-                    AppTextConstants.appNameText,
-                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      color: AppColors.background,
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.w600,
+                  centerTitle: true,
+                  title: _isCollapsed
+                      ? Text(
+                          AppTextConstants.appNameText,
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(
+                                color: AppColors.background,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.sp,
+                              ),
+                        )
+                      : null,
+
+                  background: Container(
+                    color: AppColors.primary,
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 80.h,
+                          bottom: 20.h,
+                          right: 16.w,
+                          left: 16.w,
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(16.w),
+                          decoration: BoxDecoration(
+                            color: AppColors.background,
+                            borderRadius: BorderRadius.circular(10.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 10,
+                                offset: Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                spacing: 10.w,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  // six jar logo
+                                  Icon(
+                                    Icons.savings,
+                                    size: 28.w,
+                                    color: AppColors.primary,
+                                  ),
+
+                                  // Six Jar
+                                  Text(
+                                    AppTextConstants.appNameText,
+                                    textAlign: TextAlign.start,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineLarge
+                                        ?.copyWith(
+                                          color: AppColors.primary,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 20.sp,
+                                        ),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: 6.h),
+
+                              Text(
+                                '''“Every jar is a step toward a life of purpose, balance, and abundance.”''',
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.headlineLarge
+                                    ?.copyWith(
+                                      color: AppColors.textSecondary,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 13.sp,
+                                    ),
+                              ),
+
+                              SizedBox(height: 12.h),
+
+                              // Title
+                              Text(
+                                "Total Balance",
+                                style: Theme.of(context).textTheme.headlineLarge
+                                    ?.copyWith(
+                                      color: AppColors.textSecondary,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14.sp,
+                                    ),
+                              ),
+
+                              SizedBox(height: 6.h),
+
+                              // Total Balance Amount
+                              Text(
+                                "Rs. 10,000 (INR)",
+                                style: Theme.of(context).textTheme.headlineLarge
+                                    ?.copyWith(
+                                      color: AppColors.textPrimary,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20.sp,
+                                    ),
+                              ),
+
+                              SizedBox(height: 12.h),
+
+                              // Add income
+                              SixJarFilledIconBtn(
+                                height: 36.h,
+                                width: double.infinity,
+                                onPressed: () {},
+                                icon: Icons.add,
+                                label: "Add Income",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  centerTitle: true,
-                  background: Container(color: AppColors.primary),
                 ),
               ),
 

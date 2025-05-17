@@ -15,6 +15,8 @@ import 'package:six_jar/commons/bloc/connectivity_bloc.dart' as _i268;
 import 'package:six_jar/core/service/hive_service.dart' as _i1002;
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart'
     as _i925;
+import 'package:six_jar/features/my_expense/presentation/bloc/jar_selection_bloc.dart'
+    as _i10;
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart'
     as _i578;
 import 'package:six_jar/features/splash/presentation/bloc/app_version_bloc.dart'
@@ -27,6 +29,7 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i10.JarSelectionBloc>(() => _i10.JarSelectionBloc());
     gh.factory<_i578.OnBoardingBloc>(() => _i578.OnBoardingBloc());
     gh.singleton<_i268.ConnectivityBloc>(() => _i268.ConnectivityBloc());
     gh.singleton<_i93.AppVersionBloc>(() => _i93.AppVersionBloc());

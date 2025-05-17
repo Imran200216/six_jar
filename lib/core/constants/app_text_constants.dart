@@ -130,4 +130,32 @@ class AppTextConstants {
   static const String logoutSubTitle =
       "Don’t worry, everything will be just as you left it.";
   static const String logout = "Logout";
+
+  // Expense title
+  static const String myExpense = "My Expense";
+
+  // About title
+  static const String about = "About";
+
+  // Settings title
+  static const String settings = "Settings";
+
+  // Add Expense
+  static const String addExpense = "Add Expense";
+
+  // Expense amount
+  static const String addExpenseBottomSheetTitle = "Add Expense from";
+  static const String expenseAmount = "Expense Amount";
+  static const String description = "Description";
+  static const String expenseDescripton = "What was this expense for?";
+
+  // Filter Search Bottom Modal Sheet Content
+  static const String filterSearch = "Filter search";
+  static const String filterSearchDescription =
+      "Narrow down your results to find specific transactions based on amount, date and category.";
+  static const String dateRange = "Date Range";
+  static const String from = "From";
+  static const String to = "To";
+  static const String clearAll = "Clear All";
+  static const String selectCategory = "Select Category";
 }

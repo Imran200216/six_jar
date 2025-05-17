@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_outlined_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_text_field.dart';
+import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 
 void showSixJarAddExpenseBottomSheet({
@@ -33,8 +34,9 @@ void showSixJarAddExpenseBottomSheet({
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Add Expense from
               Text(
-                "Add Expense from $title",
+                "${AppTextConstants.addExpenseBottomSheetTitle} $title",
                 style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                   color: AppColors.textPrimary,
                   fontSize: 14.sp,
@@ -42,38 +44,48 @@ void showSixJarAddExpenseBottomSheet({
                 ),
               ),
               SizedBox(height: 30.h),
+
+              // Amount text field
               SixJarTextField(
-                textFieldLabel: "Expense Amount",
+                textFieldLabel: AppTextConstants.expenseAmount,
                 keyboardType: TextInputType.number,
                 controller: amountController,
                 hint: "0.00",
                 prefixIcon: Icons.attach_money,
               ),
+
               SizedBox(height: 12.h),
+
+              // Expense Description Text field
               SixJarTextField(
-                textFieldLabel: "Description",
+                textFieldLabel: AppTextConstants.description,
                 keyboardType: TextInputType.text,
                 controller: descriptionController,
-                hint: "What was this expense for?",
+                hint: AppTextConstants.expenseDescripton,
                 prefixIcon: Icons.description,
                 maxLines: 4,
               ),
+
               SizedBox(height: 30.h),
+
+              // Add Expense
               SixJarFilledIconBtn(
                 width: double.infinity,
                 height: 34.h,
                 onPressed: onAddExpense,
                 icon: Icons.add_outlined,
-                label: "Add Expense",
+                label: AppTextConstants.addExpense,
               ),
               SizedBox(height: 12.h),
+
+              // Cancel btn
               SixJarOutlinedIconBtn(
                 width: double.infinity,
                 borderColor: AppColors.textSecondary,
                 height: 34.h,
                 onPressed: () => GoRouter.of(context).pop(),
                 iconData: Icons.cancel_outlined,
-                label: "Cancel",
+                label: AppTextConstants.cancelText,
               ),
             ],
           ),

@@ -3,12 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
+import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/di/injectable.dart';
 import 'package:six_jar/core/router/app_router.dart';
 import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/core/theme/app_theme.dart';
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
+import 'package:six_jar/features/my_expense/presentation/bloc/jar_selection_bloc.dart';
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart';
 import 'package:six_jar/features/splash/presentation/bloc/app_version_bloc.dart';
 
@@ -56,6 +58,9 @@ class MyApp extends StatelessWidget {
 
         // Connectivity Bloc
         BlocProvider(create: (context) => getIt<ConnectivityBloc>()),
+
+        // Jar Selection Bloc 
+        BlocProvider(create: (context) => getIt<JarSelectionBloc>(),)
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -65,7 +70,7 @@ class MyApp extends StatelessWidget {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             routerConfig: appRouter,
-            title: 'Six Jar',
+            title: AppTextConstants.appNameText,
             theme: AppTheme.lightTheme,
           );
         },

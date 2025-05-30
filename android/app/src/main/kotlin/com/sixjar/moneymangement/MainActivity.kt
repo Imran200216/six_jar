@@ -1,4 +1,4 @@
-package com.example.six_jar
+package com.sixjar.moneymangement
 
 import io.flutter.embedding.android.FlutterActivity
 

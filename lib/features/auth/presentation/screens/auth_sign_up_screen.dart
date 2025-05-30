@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_outlined_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_text_field.dart';
 import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
-import 'package:six_jar/core/constants/app_assets.constants.dart';
+import 'package:six_jar/core/constants/app_assets_constants.dart';
+import 'package:six_jar/core/constants/app_db_constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
-import 'package:six_jar/core/di/injectable.dart';
 import 'package:six_jar/core/helper/app_logger_helper.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
 import 'package:six_jar/core/helper/app_validators_helper.dart';
-import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/features/auth/presentation/widgets/auth_divider_content.dart';
 import 'package:six_jar/features/auth/presentation/widgets/auth_footer.dart';
@@ -95,12 +95,13 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                       // Sign Up Text
                       Text(
                         AppTextConstants.signUpText,
-                        style: Theme.of(context).textTheme.headlineLarge
-                            ?.copyWith(
-                              color: AppColors.textPrimary,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 24,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineLarge?.copyWith(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24,
+                        ),
                       ),
 
                       SizedBox(height: 8.h),
@@ -108,12 +109,13 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                       // description
                       Text(
                         AppTextConstants.signUpDescriptionText,
-                        style: Theme.of(context).textTheme.headlineLarge
-                            ?.copyWith(
-                              color: AppColors.textSecondary,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineLarge?.copyWith(
+                          color: AppColors.textSecondary,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
                       ),
 
                       SizedBox(height: 30.h),
@@ -129,8 +131,11 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                               textFieldLabel:
                                   AppTextConstants.userNameLabelText,
                               controller: userNameAuthSignUpController,
-                              validator: (value) =>
-                                  AppValidatorHelper.validateUsername(value),
+                              validator:
+                                  (value) =>
+                                      AppValidatorHelper.validateUsername(
+                                        value,
+                                      ),
                               keyboardType: TextInputType.name,
                               hint: AppTextConstants.userNameHintTextFieldText,
                               prefixIcon: Icons.person_outline_outlined,
@@ -146,8 +151,9 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                             SixJarTextField(
                               textFieldLabel: AppTextConstants.emailLabelText,
                               controller: emailAuthSignUpController,
-                              validator: (value) =>
-                                  AppValidatorHelper.validateEmail(value),
+                              validator:
+                                  (value) =>
+                                      AppValidatorHelper.validateEmail(value),
                               keyboardType: TextInputType.emailAddress,
                               hint: AppTextConstants.emailHintTextFieldText,
                               prefixIcon: Icons.alternate_email_outlined,
@@ -161,8 +167,11 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                               textFieldLabel:
                                   AppTextConstants.passwordLabelText,
                               controller: passwordAuthSignUpController,
-                              validator: (value) =>
-                                  AppValidatorHelper.validatePassword(value),
+                              validator:
+                                  (value) =>
+                                      AppValidatorHelper.validatePassword(
+                                        value,
+                                      ),
                               keyboardType: TextInputType.visiblePassword,
                               hint: AppTextConstants.passwordHintTextFieldText,
                               prefixIcon: Icons.lock_outline,
@@ -192,12 +201,22 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                             // Auth Email Login Logic
 
                             // Hive Auth Logged Status
-                            final hiveService = getIt<HiveService>();
-                            await hiveService.setLoggedIn(true);
+                            final authBox = Hive.box(
+                              AppDbConstants.hiveAuthBox,
+                            );
+                            await authBox.put(
+                              AppDbConstants.isLoggedInKey,
+                              true,
+                            );
+
+                            // Read the value
+                            final status = authBox.get(
+                              AppDbConstants.isLoggedInKey,
+                            );
 
                             // Logger
                             AppLoggerHelper.logInfo(
-                              "✅ Auth Logged status saved in Hive.",
+                              "✅ Auth Logged status saved in Hive: $status",
                             );
 
                             // Currency Select Screen
@@ -231,15 +250,25 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                           Expanded(
                             child: SixJarOutlinedIconBtn(
                               onPressed: () async {
-                                // Hive Auth Logged Status
-                                final hiveService = getIt<HiveService>();
-                                await hiveService.setLoggedIn(true);
-
                                 // Google Auth Sign Logic
+
+                                // Hive Auth Logged Status
+                                final authBox = Hive.box(
+                                  AppDbConstants.hiveAuthBox,
+                                );
+                                await authBox.put(
+                                  AppDbConstants.isLoggedInKey,
+                                  true,
+                                );
+
+                                // Read the value
+                                final status = authBox.get(
+                                  AppDbConstants.isLoggedInKey,
+                                );
 
                                 // Logger
                                 AppLoggerHelper.logInfo(
-                                  "✅ Auth Logged status saved in Hive.",
+                                  "✅ Auth Logged status saved in Hive: $status",
                                 );
 
                                 // currency select
@@ -259,8 +288,23 @@ class _AuthSignUpScreenState extends State<AuthSignUpScreen> {
                                 // Auth Apple SignUp Logic
 
                                 // Hive Auth Logged Status
-                                final hiveService = getIt<HiveService>();
-                                await hiveService.setLoggedIn(true);
+                                final authBox = Hive.box(
+                                  AppDbConstants.hiveAuthBox,
+                                );
+                                await authBox.put(
+                                  AppDbConstants.isLoggedInKey,
+                                  true,
+                                );
+
+                                // Read the value
+                                final status = authBox.get(
+                                  AppDbConstants.isLoggedInKey,
+                                );
+
+                                // Logger
+                                AppLoggerHelper.logInfo(
+                                  "✅ Auth Logged status saved in Hive: $status",
+                                );
 
                                 // Logger
                                 AppLoggerHelper.logInfo(

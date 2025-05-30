@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
-import 'package:six_jar/core/constants/app_assets.constants.dart';
+import 'package:six_jar/core/constants/app_assets_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';

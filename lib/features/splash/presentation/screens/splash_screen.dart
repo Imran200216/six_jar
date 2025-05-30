@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:six_jar/core/constants/app_db_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
-import 'package:six_jar/core/di/injectable.dart';
-import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/features/splash/presentation/bloc/app_version_bloc.dart';
 
@@ -23,43 +23,45 @@ class _SplashScreenState extends State<SplashScreen> {
     context.read<AppVersionBloc>().add(FetchAppVersionEvent());
 
     // navigate screen logic
-    navigateScreen();
+    navigateScreen(context);
 
     super.initState();
   }
 
   // Navigate Screen Logic
-  Future<void> navigateScreen() async {
-    // timer
-    await Future.delayed(const Duration(seconds: 2));
+  Future<void> navigateScreen(BuildContext context) async {
+  await Future.delayed(const Duration(seconds: 2));
 
-    // Hive status
-    final hiveService = getIt<HiveService>();
-    final isOnBoardingCompleted = hiveService.isOnBoardingCompleted;
-    final isAuthLoggedIn = hiveService.isLoggedIn;
-    final isCurrencySelected = hiveService.isCurrencySelected;
+  final hiveOnBoardingBox = Hive.box(AppDbConstants.hiveOnBoardingBox);
+  final userOnBoardingStatus = hiveOnBoardingBox.get(
+    AppDbConstants.isOnBoardedKey,
+    defaultValue: false,
+  );
 
-    if (!isOnBoardingCompleted) {
-      // On Boarding Screen
-      GoRouter.of(
-        context,
-      ).pushReplacementNamed(AppRouteConstants.onBoarding.name);
-    } else if (!isAuthLoggedIn) {
-      // Auth Login Screen
-      GoRouter.of(
-        context,
-      ).pushReplacementNamed(AppRouteConstants.authLogin.name);
-    } else if (!isCurrencySelected) {
-      // Currency Select Screen
-      GoRouter.of(
-        context,
-      ).pushReplacementNamed(AppRouteConstants.currencySelect.name);
-    } else {
-      // Home Screen
-      GoRouter.of(context).pushReplacementNamed(AppRouteConstants.home.name);
-    }
+  final hiveOnCurrencyBox = Hive.box(AppDbConstants.hiveCurrencyBox);
+  final userCurrencySelectedStatus = hiveOnCurrencyBox.get(
+    AppDbConstants.isCurrencySelectedKey,
+    defaultValue: false,
+  );
+
+  final hiveOnAuthBox = Hive.box(AppDbConstants.hiveAuthBox);
+  final userIsLoggedInStatus = hiveOnAuthBox.get(
+    AppDbConstants.isLoggedInKey,
+    defaultValue: false,
+  );
+
+  if (!userOnBoardingStatus) {
+    GoRouter.of(context).pushReplacementNamed(AppRouteConstants.onBoarding.name);
+  } else if (!userCurrencySelectedStatus) {
+    GoRouter.of(context).pushReplacementNamed(AppRouteConstants.currencySelect.name);
+  } else if (!userIsLoggedInStatus) {
+    GoRouter.of(context).pushReplacementNamed(AppRouteConstants.authLogin.name);
+  } else {
+    GoRouter.of(context).pushReplacementNamed(AppRouteConstants.home.name);
   }
+}
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

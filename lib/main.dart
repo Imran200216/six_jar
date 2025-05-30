@@ -3,10 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
+import 'package:six_jar/config/firebase/firebase_config.dart';
+import 'package:six_jar/config/hive/hive_config.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/di/injectable.dart';
 import 'package:six_jar/core/router/app_router.dart';
-import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/core/theme/app_theme.dart';
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
@@ -21,11 +22,11 @@ void main() async {
   // Injectables
   configureDependencies();
 
-  // Get the HiveService instance from GetIt
-  final hiveService = getIt<HiveService>();
+  // Initialize Firebase
+  await FirebaseConfig.init();
 
   // Initialize Hive boxes
-  await hiveService.init();
+  await HiveConfig.init();
 
   // Device Orientation
   SystemChrome.setPreferredOrientations([

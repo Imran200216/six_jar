@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "278679874314",
+    "project_id": "sixjarmoneymanagement",
+    "storage_bucket": "sixjarmoneymanagement.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278679874314:android:f7d95a82c92036b22928f3",
+        "android_client_info": {
+          "package_name": "com.sixjar.moneymangement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1GNRffAiE8_v0_Ce10M0Gr86BsVDn1CU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

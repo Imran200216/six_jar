@@ -4,15 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
-import 'package:six_jar/core/constants/app_assets.constants.dart';
+import 'package:six_jar/core/constants/app_assets_constants.dart';
+import 'package:six_jar/core/constants/app_db_constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
-import 'package:six_jar/core/di/injectable.dart';
 import 'package:six_jar/core/helper/app_logger_helper.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
-import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
 import 'package:six_jar/features/currency_select/presentation/widgets/six_jar_currency_text_field.dart';
@@ -145,13 +145,23 @@ class CurrencySelectScreen extends StatelessWidget {
                           height: 36.h,
                           width: double.infinity,
                           onPressed: () async {
-                            // Hive Currency Selected Status
-                            final hiveService = getIt<HiveService>();
-                            await hiveService.setCurrencySelected(true);
+                            // Hive Currency Selected Status=
+                            final currencySelectedBox = Hive.box(
+                              AppDbConstants.hiveCurrencyBox,
+                            );
+                            await currencySelectedBox.put(
+                              AppDbConstants.isCurrencySelectedKey,
+                              true,
+                            );
+
+                            // Read the value
+                            final status = currencySelectedBox.get(
+                              AppDbConstants.isCurrencySelectedKey,
+                            );
 
                             // Logger
                             AppLoggerHelper.logInfo(
-                              "✅ Currency Selected status saved in Hive.",
+                              "✅ Currency Selected status saved in Hive: $status",
                             );
 
                             // Home Screen

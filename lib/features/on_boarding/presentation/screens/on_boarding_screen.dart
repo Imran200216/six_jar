@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hive/hive.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_outlined_icon_btn.dart';
 import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
-import 'package:six_jar/core/constants/app_assets.constants.dart';
+import 'package:six_jar/core/constants/app_assets_constants.dart';
+import 'package:six_jar/core/constants/app_db_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
-import 'package:six_jar/core/di/injectable.dart';
 import 'package:six_jar/core/helper/app_logger_helper.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
-import 'package:six_jar/core/service/hive_service.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart';
 import 'package:six_jar/features/on_boarding/presentation/widgets/on_boarding.dart';
@@ -146,9 +146,8 @@ class _OnBoardingScreenContentState extends State<_OnBoardingScreenContent> {
               ),
               BlocBuilder<OnBoardingBloc, OnBoardingState>(
                 builder: (context, state) {
-                  final currentPage = state is OnBoardingInitial
-                      ? state.currentPage
-                      : 0;
+                  final currentPage =
+                      state is OnBoardingInitial ? state.currentPage : 0;
 
                   return SixJarFilledIconBtn(
                     height: 38.h,
@@ -161,12 +160,17 @@ class _OnBoardingScreenContentState extends State<_OnBoardingScreenContent> {
                         );
                       } else {
                         // Hive OnBoarding Status
-                        final hiveService = getIt<HiveService>();
-                        await hiveService.setOnBoardingCompleted(true);
+                        final onBoardingBox = Hive.box(AppDbConstants.hiveOnBoardingBox);
+                        await onBoardingBox.put(AppDbConstants.isOnBoardedKey, true);
+
+                        // Read the value
+                        final status = onBoardingBox.get(
+                          AppDbConstants.isOnBoardedKey,
+                        );
 
                         // Logger
                         AppLoggerHelper.logInfo(
-                          "✅ Onboarding completed status saved in Hive.",
+                          "✅ Onboarding completed status saved in Hive: $status",
                         );
 
                         // Login Screen
@@ -175,9 +179,10 @@ class _OnBoardingScreenContentState extends State<_OnBoardingScreenContent> {
                         );
                       }
                     },
-                    icon: currentPage < 2
-                        ? Icons.skip_next_outlined
-                        : Icons.login,
+                    icon:
+                        currentPage < 2
+                            ? Icons.skip_next_outlined
+                            : Icons.login,
                     label: currentPage < 2 ? "Continue" : "Get Started",
                   );
                 },

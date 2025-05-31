@@ -31,12 +31,32 @@ void showSixJarFilterBottomModalSheet({
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 30.h),
+          padding: EdgeInsets.only(
+            left: 20.w,
+            right: 20.w,
+            bottom: 30.h,
+            top: 10.h,
+          ),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Drawer Header Line
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    height: 4.h,
+                    width: 40.w,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.r),
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20.h),
+
                 // Filter Search Text
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

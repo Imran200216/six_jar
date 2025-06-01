@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_text_btn_field.dart';
 import 'package:six_jar/commons/Widgets/six_jar_text_field.dart';
-import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
+import 'package:six_jar/core/blocs/connectivity_bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/helper/app_logger_helper.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';

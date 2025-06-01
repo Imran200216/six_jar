@@ -11,7 +11,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:six_jar/commons/bloc/connectivity_bloc.dart' as _i268;
+import 'package:six_jar/core/blocs/connectivity_bloc/connectivity_bloc.dart'
+    as _i705;
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart'
     as _i925;
 import 'package:six_jar/features/my_expense/presentation/blocs/jar_selection_bloc/jar_selection_bloc.dart'
@@ -33,7 +34,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i759.JarSelectionBloc>(() => _i759.JarSelectionBloc());
     gh.factory<_i906.RangeSliderBloc>(() => _i906.RangeSliderBloc());
     gh.factory<_i578.OnBoardingBloc>(() => _i578.OnBoardingBloc());
-    gh.singleton<_i268.ConnectivityBloc>(() => _i268.ConnectivityBloc());
+    gh.singleton<_i705.ConnectivityBloc>(() => _i705.ConnectivityBloc());
     gh.singleton<_i93.AppVersionBloc>(() => _i93.AppVersionBloc());
     gh.singleton<_i925.CurrencySelectedBloc>(
       () => _i925.CurrencySelectedBloc(),

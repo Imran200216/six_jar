@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
-import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
+import 'package:six_jar/core/blocs/connectivity_bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';

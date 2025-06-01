@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hive/hive.dart';
 import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_outlined_icon_btn.dart';
-import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
+import 'package:six_jar/core/blocs/connectivity_bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_assets_constants.dart';
 import 'package:six_jar/core/constants/app_db_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';

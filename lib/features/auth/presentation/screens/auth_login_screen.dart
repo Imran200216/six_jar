@@ -7,7 +7,7 @@ import 'package:six_jar/commons/Widgets/six_jar_filled_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_outlined_icon_btn.dart';
 import 'package:six_jar/commons/Widgets/six_jar_text_btn_field.dart';
 import 'package:six_jar/commons/Widgets/six_jar_text_field.dart';
-import 'package:six_jar/commons/bloc/connectivity_bloc.dart';
+import 'package:six_jar/core/blocs/connectivity_bloc/connectivity_bloc.dart';
 import 'package:six_jar/core/constants/app_assets_constants.dart';
 import 'package:six_jar/core/constants/app_db_constants.dart';
 import 'package:six_jar/core/constants/app_router_constants.dart';

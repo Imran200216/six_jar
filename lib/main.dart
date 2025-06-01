@@ -11,6 +11,7 @@ import 'package:six_jar/core/router/app_router.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
 import 'package:six_jar/core/theme/app_theme.dart';
 import 'package:six_jar/features/currency_select/presentation/bloc/currency_selected_bloc.dart';
+import 'package:six_jar/features/home/presentation/blocs/sliver_scroll/sliver_scroll_bloc.dart';
 import 'package:six_jar/features/my_expense/presentation/blocs/jar_selection_bloc/jar_selection_bloc.dart';
 import 'package:six_jar/features/my_expense/presentation/blocs/range_slider_bloc/range_slider_bloc.dart';
 import 'package:six_jar/features/on_boarding/presentation/bloc/on_boarding_bloc.dart';
@@ -66,6 +67,9 @@ class MyApp extends StatelessWidget {
 
         // Range Slider Bloc
         BlocProvider(create: (context) => getIt<RangeSliderBloc>()),
+
+        // Sliver Scroll Bloc
+        BlocProvider(create: (context) => SliverScrollBloc()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

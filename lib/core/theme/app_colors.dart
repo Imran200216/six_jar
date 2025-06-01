@@ -49,6 +49,6 @@ class AppColors {
   static const Color playColor = Colors.redAccent;
   static const Color giveColor = Colors.teal;
 
-
-
+  // Profile list tile
+  static const Color profileListTileColor = Color(0xFF9EA0A2);
 }

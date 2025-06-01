@@ -8,6 +8,7 @@ import 'package:six_jar/core/constants/app_router_constants.dart';
 import 'package:six_jar/core/constants/app_text_constants.dart';
 import 'package:six_jar/core/helper/app_snack_bar_helper.dart';
 import 'package:six_jar/core/theme/app_colors.dart';
+import 'package:six_jar/features/home/presentation/widgets/six_jar_add_income_bottom_sheet.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_chart_diagram.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_container.dart';
 import 'package:six_jar/features/home/presentation/widgets/six_jar_drawer.dart';
@@ -58,6 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final TextEditingController financialFreedomExpenseDescriptionController =
       TextEditingController();
+
+  // Six Jar Add Income Bottom Sheet (Income Controller)
+  final TextEditingController addIncomeController = TextEditingController();
 
   // Scroll controler
   final ScrollController _scrollController = ScrollController();
@@ -158,7 +162,6 @@ class _HomeScreenState extends State<HomeScreen> {
             userEmail: 'Ijassmohammed@gmail.com',
             userImageUrl:
                 'https://images.unsplash.com/photo-1503443207922-dff7d543fd0e?q=80&w=2427&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            onHomeTap: () {},
             onMyExpenseTap: () {
               // Expense Screen
               GoRouter.of(context).pushNamed(AppRouteConstants.myExpense.name);
@@ -203,17 +206,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: _isCollapsed
-                      ? Text(
-                          AppTextConstants.appNameText,
-                          style: Theme.of(context).textTheme.headlineSmall
-                              ?.copyWith(
-                                color: AppColors.background,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18.sp,
-                              ),
-                        )
-                      : null,
+                  title:
+                      _isCollapsed
+                          ? Text(
+                            AppTextConstants.appNameText,
+                            style: Theme.of(
+                              context,
+                            ).textTheme.headlineSmall?.copyWith(
+                              color: AppColors.background,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18.sp,
+                            ),
+                          )
+                          : null,
 
                   background: Container(
                     color: AppColors.primary,
@@ -260,14 +265,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Text(
                                     AppTextConstants.appNameText,
                                     textAlign: TextAlign.start,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineLarge
-                                        ?.copyWith(
-                                          color: AppColors.primary,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 20.sp,
-                                        ),
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.headlineLarge?.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20.sp,
+                                    ),
                                   ),
                                 ],
                               ),
@@ -275,27 +279,29 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(height: 6.h),
 
                               Text(
-                                '''“Every jar is a step toward a life of purpose, balance, and abundance.”''',
+                                AppTextConstants.sixJarQuote,
                                 textAlign: TextAlign.start,
-                                style: Theme.of(context).textTheme.headlineLarge
-                                    ?.copyWith(
-                                      color: AppColors.textSecondary,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13.sp,
-                                    ),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineLarge?.copyWith(
+                                  color: AppColors.textSecondary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 13.sp,
+                                ),
                               ),
 
                               SizedBox(height: 12.h),
 
                               // Title
                               Text(
-                                "Total Balance",
-                                style: Theme.of(context).textTheme.headlineLarge
-                                    ?.copyWith(
-                                      color: AppColors.textSecondary,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14.sp,
-                                    ),
+                                AppTextConstants.totalBalance,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineLarge?.copyWith(
+                                  color: AppColors.textSecondary,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14.sp,
+                                ),
                               ),
 
                               SizedBox(height: 6.h),
@@ -303,12 +309,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               // Total Balance Amount
                               Text(
                                 "Rs. 10,000 (INR)",
-                                style: Theme.of(context).textTheme.headlineLarge
-                                    ?.copyWith(
-                                      color: AppColors.textPrimary,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20.sp,
-                                    ),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineLarge?.copyWith(
+                                  color: AppColors.textPrimary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20.sp,
+                                ),
                               ),
 
                               SizedBox(height: 12.h),
@@ -317,7 +324,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               SixJarFilledIconBtn(
                                 height: 36.h,
                                 width: double.infinity,
-                                onPressed: () {},
+                                onPressed: () {
+                                  // show Add Income Bottom Sheet
+                                  showSixJarAddIncomeBottomSheet(
+                                    context: context,
+                                    onAddIncome: () {},
+                                    incomeController: addIncomeController,
+                                  );
+                                },
                                 icon: Icons.add,
                                 label: "Add Income",
                               ),

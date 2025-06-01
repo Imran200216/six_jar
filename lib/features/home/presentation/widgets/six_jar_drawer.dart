@@ -12,7 +12,6 @@ class SixJarDrawer extends StatefulWidget {
   final String userName;
   final String userEmail;
   final String userImageUrl;
-  final VoidCallback onHomeTap;
   final VoidCallback onSettingsTap;
   final VoidCallback onLogoutTap;
   final VoidCallback onAboutTap;
@@ -23,7 +22,6 @@ class SixJarDrawer extends StatefulWidget {
     required this.userName,
     required this.userEmail,
     required this.userImageUrl,
-    required this.onHomeTap,
     required this.onSettingsTap,
     required this.onLogoutTap,
     required this.onAboutTap,
@@ -43,12 +41,6 @@ class _SixJarDrawerState extends State<SixJarDrawer> {
           // Header
           _buildHeader(context),
 
-          // Home
-          SixJarDrawerListTile(
-            onTap: widget.onHomeTap,
-            drawerTitle: "Home",
-            drawerIcon: Icons.home,
-          ),
 
           // About
           SixJarDrawerListTile(

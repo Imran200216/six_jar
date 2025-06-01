@@ -159,4 +159,13 @@ class AppTextConstants {
   static const String clearAll = "Clear All";
   static const String selectCategory = "Select Category";
   static const String searchAmount = "Search Amount";
+
+  // Six Jar Quotes
+  static const String sixJarQuote =
+      '''“Every jar is a step toward a life of purpose, balance, and abundance.”''';
+
+  static const String totalBalance = "Total Balance";
+
+  // Add Income
+  static const String addIncome = "Add Income";
 }

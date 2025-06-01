@@ -16,7 +16,17 @@ class AboutScreen extends StatelessWidget {
           GoRouter.of(context).pop();
         },
       ),
-      body: SafeArea(child: Center(child: Text("hi about"))),
+      body: SafeArea(child: Column(children: [
+
+      
+
+
+
+
+
+
+        ],
+      )),
     );
   }
 }
